@@ -3,7 +3,9 @@ package gr.agrora_api;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+@CrossOrigin(origins = "https://elegant-visvesvaraya.213-158-90-234.plesk.page")
 @RestController
 @RequestMapping("/api/contact")
 public class ContactMessageController {
