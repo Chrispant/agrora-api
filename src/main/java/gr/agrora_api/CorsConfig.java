@@ -17,9 +17,18 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        System.out.println("CorsConfig - allowedorigns" + allowedOriginsStr);
+
+        if (allowedOriginsStr == null || allowedOriginsStr.isEmpty()){
+            System.out.println("WARNING : CORS_ALLOWED_ORIGINS IS NULL or empty");
+            return;
+        }
+
         String[] origins = Arrays.stream(allowedOriginsStr.split(","))
                         .map(String::trim)
                         .toArray(String[]::new);
+
+        System.out.println("CORS ORIGINS : "+Arrays.toString(origins));
 
         registry.addMapping("/api/**")
                 .allowedOrigins(origins)
