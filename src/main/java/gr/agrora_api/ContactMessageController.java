@@ -4,12 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 
-//Cors permission for request from the webpage
-@CrossOrigin(origins = "https://elegant-visvesvaraya.213-158-90-234.plesk.page",
-methods = {RequestMethod.POST, RequestMethod.OPTIONS},
-allowedHeaders = "Content-Type")
 @RestController
-@RequestMapping("api/contact")
+@RequestMapping("/api/contact")
 public class ContactMessageController {
 
     private final ContactMessageRepository contactMessageRepository;
