@@ -5,7 +5,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 
 
-
+@CrossOrigin(origins = "https://agrora.gr")
 @RestController
 @RequestMapping("/api/contact")
 public class ContactMessageController {
