@@ -3,8 +3,6 @@ package gr.agrora_api;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 
 @RestController
 @RequestMapping("/api/contact")
@@ -16,11 +14,9 @@ public class ContactMessageController {
     public ContactMessageController(ContactMessageRepository contactMessageRepository, EmailService emailService) {
         this.contactMessageRepository = contactMessageRepository;
         this.emailService = emailService;
-
     }
 
     @PostMapping
-    @CrossOrigin(origins = "https://agrora.gr",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
     @ResponseStatus(HttpStatus.CREATED)
     public ContactMessage createContactMessage(@Valid @RequestBody ContactMessageRequest request) {
         ContactMessage contactMessage = new ContactMessage();
@@ -32,12 +28,6 @@ public class ContactMessageController {
         emailService.sendContactMessageNotification(savedMessage);
 
         return savedMessage;
-    }
-
-    @RequestMapping(method = RequestMethod.OPTIONS)
-    @CrossOrigin(origins = "https://agrora.gr", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
-    public void handleOptions() {
-        // Preflight handler
     }
 
 }
