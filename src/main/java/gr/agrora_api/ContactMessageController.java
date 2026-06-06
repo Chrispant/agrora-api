@@ -35,6 +35,7 @@ public class ContactMessageController {
     }
 
     @RequestMapping(method = RequestMethod.OPTIONS)
+    @CrossOrigin(origins = "https://agrora.gr", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
     public void handleOptions() {
         // Preflight handler
     }
