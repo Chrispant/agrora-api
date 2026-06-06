@@ -3,9 +3,10 @@ package gr.agrora_api;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@CrossOrigin(origins = "https://agrora.gr")
+@CrossOrigin(origins = "https://agrora.gr",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api/contact")
 public class ContactMessageController {
