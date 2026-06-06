@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@CrossOrigin(origins = "https://agrora.gr",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api/contact")
 public class ContactMessageController {
@@ -21,6 +20,7 @@ public class ContactMessageController {
     }
 
     @PostMapping
+    @CrossOrigin(origins = "https://agrora.gr",methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
     @ResponseStatus(HttpStatus.CREATED)
     public ContactMessage createContactMessage(@Valid @RequestBody ContactMessageRequest request) {
         ContactMessage contactMessage = new ContactMessage();
@@ -34,5 +34,9 @@ public class ContactMessageController {
         return savedMessage;
     }
 
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public void handleOptions() {
+        // Preflight handler
+    }
 
 }
