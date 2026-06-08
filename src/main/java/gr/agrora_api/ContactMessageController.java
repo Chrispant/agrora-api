@@ -1,5 +1,6 @@
 package gr.agrora_api;
 
+import com.resend.core.exception.ResendException;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class ContactMessageController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ContactMessage createContactMessage(@Valid @RequestBody ContactMessageRequest request) {
+    public ContactMessage createContactMessage(@Valid @RequestBody ContactMessageRequest request) throws ResendException {
         ContactMessage contactMessage = new ContactMessage();
         contactMessage.setName(request.getName());
         contactMessage.setEmail(request.getEmail());
