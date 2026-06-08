@@ -1,12 +1,17 @@
 package gr.agrora_api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
+
+    private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     private final JavaMailSender mailSender;
     private final String recipientEmail;
@@ -33,8 +38,16 @@ public class EmailService {
                
                 Message : %s""".formatted(contactMessage.getName(),contactMessage.getEmail(),contactMessage.getMessage()
                 ));
-        mailSender.send(message);
 
-
+        logger.info("Attempting to send contact notification email to {} for message id {}",
+                recipientEmail, contactMessage.getId());
+        try {
+            mailSender.send(message);
+            logger.info("Contact notification email sent successfully to {} for message id {}",
+                    recipientEmail, contactMessage.getId());
+        } catch (MailException e) {
+            logger.error("Failed to send contact notification email to {} for message id {}: {}",
+                    recipientEmail, contactMessage.getId(), e.getMessage(), e);
+        }
     }
 }
