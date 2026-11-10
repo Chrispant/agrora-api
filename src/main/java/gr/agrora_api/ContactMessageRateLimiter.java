@@ -33,10 +33,9 @@ public class ContactMessageRateLimiter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
 
-        if(request.getRequestURI().equals("api/contact")){
-            chain.doFilter(req,res);
-            return;
-        }
+
+        chain.doFilter(req,res);
+
 
         String ip = request.getRemoteAddr();
         long now = System.currentTimeMillis();
