@@ -40,7 +40,7 @@ public class ContactMessageRateLimiter implements Filter {
         }
 
 
-        String ip = getClientIp(request);
+        String ip = request.getRemoteAddr();
         long now = System.currentTimeMillis();
 
         // 1. Get or Create the Deque for this IP
@@ -71,16 +71,6 @@ public class ContactMessageRateLimiter implements Filter {
 
     }
 
-    private String getClientIp(HttpServletRequest request) {
-        String forwarded = request.getHeader("X-Forwarded-For");
-            if (forwarded != null && !forwarded.isEmpty()) {
-                return forwarded.split(",")[0].trim();
-            }
-            String xRealIp = request.getHeader("X-Real-IP");
-            if (xRealIp != null && !xRealIp.isEmpty()) {
-                return xRealIp;
-            }
-        return request.getRemoteAddr();
-}
+
 
 }
